@@ -6,8 +6,7 @@ L2 regularization in Adam optimization is considered.
 @author: Amirreza
 contact me : arezayan87@gmail.com
 
-### This case solves 3D flow over a city.
-the benchmark is Case E in Aij institute:
+### This case solves 3D flow over a city.the benchmark is Case E in Aij institute:
     Guidebook for CFD Predictions
     of Urban Wind Environment
     Architectural Institute of Japan
@@ -34,4 +33,11 @@ https://www.aij.or.jp/jpn/publish/cfdguide/index_e.htm
 * pandas
 * numpy
 * matplotlib
+* sklearn _optional
+
+you can install these libraries in one line easily. just copy this single in in your console:
+* pip
+  ```sh
+  python -m pip install torch pandas numpy matplotlib sklearn
+  ```
 
