@@ -42,7 +42,7 @@ you can install these libraries in one line easily. just copy this single in in 
 
 ## Contact
 
-Amirreza -  arezayan87@gmail.com
+Amirreza Rezayan -  arezayan87@gmail.com
 
 Project Link: [https://github.com/arezayan/Adaptive-weights-PINN-caseE](https://github.com/arezayan/Adaptive-weights-PINN-caseE)
 
