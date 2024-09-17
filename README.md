@@ -1,5 +1,7 @@
-# AWPINN fow solvinf 3D flow over buildings
+# AW-PINN for solving 3D flow over buildings
 Adoptive weights Physics-Informed Neural networks for solving 3D turbulent flow in steady-state condition. flow over a big cities in Japan.
+two types of optimization is used simultaneously , Adam and L-BFGS. A kind of novel adaptive method for weight balance is applied for making the trainer more robust.
+L2 regularization in Adam optimization is considered. 
 
 @author: Amirreza
 contact me : arezayan87@gmail.com
@@ -13,9 +15,9 @@ follow this site for data of the case E :
 https://www.aij.or.jp/jpn/publish/cfdguide/index_e.htm
 
 
-## How to run this example
 
-### Step 1 - Precursor Turbulent Inlet
+
+### Step 1 - How to run this example
 * provide data and boundary condition points file in csv format.
 * share your data in your gdrive
 * load your drive in colbab
