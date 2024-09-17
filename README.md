@@ -7,7 +7,7 @@ L2 regularization in Adam optimization is considered.
 contact me : arezayan87@gmail.com
 
 ### This case solves 3D flow over a city.the benchmark is Case E in Aij institute:
-    Guidebook for CFD Predictions
+__Guidebook for CFD Predictions
     of Urban Wind Environment
     Architectural Institute of Japan
 
@@ -41,3 +41,11 @@ you can install these libraries in one line easily. just copy this single in in 
   python -m pip install torch pandas numpy matplotlib sklearn
   ```
 
+!-- CONTACT -->
+## Contact
+
+Amirreza -  arezayan87@gmail.com
+
+Project Link: [https://github.com/arezayan/Adaptive-weights-PINN-caseE](https://github.com/arezayan/Adaptive-weights-PINN-caseE)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
