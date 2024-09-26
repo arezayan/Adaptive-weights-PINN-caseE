@@ -3,6 +3,8 @@ Adoptive weights Physics-Informed Neural networks for solving 3D turbulent flow 
 two types of optimization is used simultaneously , Adam and L-BFGS. A kind of novel adaptive method for weight balance is applied for making the trainer more robust.
 L2 regularization in Adam optimization is considered. 
 
+**The adoptive weight balance method is still neive and needs evolution.**
+
 
 
 ### This case solves 3D flow over a city.the benchmark is Case E in Aij institute:
