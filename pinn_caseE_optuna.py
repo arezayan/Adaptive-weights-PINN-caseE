@@ -25,7 +25,8 @@ import matplotlib.pyplot as plt
 import optuna
 import seaborn as sb
 import os
-import plotting
+#import plotting
+
 
 # Check if CUDA is available
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -118,9 +119,9 @@ def pde_residuals(model,x,y,z):
 
 
 
-    momentum_u_residual = u * u_x + v * u_y + w * u_z + p_x - (1/Re) * u_xx - tau_x #+ Ri * T
-    momentum_v_residual = u * v_x + v * v_y + w * v_z + p_y - (1/Re) * v_yy - tau_y #+ Ri * T
-    momentum_w_residual = u * w_x + v * w_y + w * w_z + p_z - (1/Re) * w_zz - tau_z #+ Ri * T
+    momentum_u_residual = u * u_x + v * u_y + w * u_z + p_x - ((1/Re) * (u_xx + u_yy + u_zz)) - tau_x #+ Ri * T
+    momentum_v_residual = u * v_x + v * v_y + w * v_z + p_y - ((1/Re) * (v_xx + v_yy + v_zz)) - tau_y #+ Ri * T
+    momentum_w_residual = u * w_x + v * w_y + w * w_z + p_z - ((1/Re) * (w_xx + w_yy + w_zz)) - tau_z #+ Ri * T
 
     # Continuity equation
     continuity_residual = u_x + v_y + w_z
@@ -246,7 +247,7 @@ def train(model,model_PDE, file_data ,file_bc, x_tesnor ,y_tensor , z_tensor, lb
       #x = torch.rand(100, 3)  # For example purposes, using random points
 
       # Training loop for this trial
-      num_epochs = 100
+      num_epochs = 10
       for epoch in range(num_epochs):
           optimizer.zero_grad()
           loss ,continuity_residual, momentum_u_residual, momentum_v_residual, momentum_w_residual,boundary_loss , data_loss = loss_func(model,model_PDE, x_tensor , y_tensor ,z_tensor,
@@ -261,7 +262,7 @@ def train(model,model_PDE, file_data ,file_bc, x_tesnor ,y_tensor , z_tensor, lb
 
   # Run the Optuna hyperparameter optimization
   study = optuna.create_study(direction="minimize")
-  study.optimize(objective, n_trials=20)  # Adjust n_trials for more thorough search
+  study.optimize(objective, n_trials=10)  # Adjust n_trials for more thorough search
 
   # Extract the best lambda values
   best_params = study.best_params
@@ -367,15 +368,17 @@ def train(model,model_PDE, file_data ,file_bc, x_tesnor ,y_tensor , z_tensor, lb
   uvwp = model(torch.cat((x_data, y_data, z_data), dim=1))
   predicted_u = uvwp[:,0]
     
-  plt.figure(dpi = 100)
-  plt.plot(y_data.detach().numpy(), predicted_u.detach().numpy() , ls = "" ,marker = "*", color = "k" , label = "PINN") 
-  plt.plot(y_data.detach().numpy(), u_data.detach().numpy() ,  ls = "" , marker = "^" ,color = "b" , label = "ground truth")
+  plt.figure(dpi = 300)
+  plt.plot( predicted_u.detach().numpy() , ls = "" ,marker = "o", color = "tab:blue" , label = "PINN") 
+  plt.plot( u_data.detach().numpy() ,  ls = "-" , marker = "+" ,color = "tab:green" , label = "ground truth")
   plt.xlabel("y : Height")
   plt.ylabel("u vel")
   plt.title("Grid of X and Y")
   plt.legend(loc = "best")
+
   plt.savefig( newpath + "/output_{epochs}.png".format(epochs=epochs))
-  plt.show()
+  
+  torch.save(model.state_dict(), 'E:\FOAM_PINN\cavHeat\CaseE\Results\PINN_case_E_optuna.pth')
   
   
          
