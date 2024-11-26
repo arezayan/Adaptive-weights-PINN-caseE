@@ -470,11 +470,6 @@ def plot_solution(x_star,y_star , z_star , u_star , title):
     plt.grid()
     plt.show()
 
-def idx_generator(array , tTOt_ratio):
-  np.random.seed(25)
-  idx = np.random.choice(len(array) , int(len(array * tTOt_ratio)))
-  return idx
-
 def train(model_u , model_v, model_w, model_p , model_T , fileData , fileBC , nIter):
     LR = 1e-3
     global lambda_1, lambda_2, lambda_3, lambda_4
@@ -484,6 +479,7 @@ def train(model_u , model_v, model_w, model_p , model_T , fileData , fileBC , nI
     lambda_4 = torch.nn.Parameter(torch.ones(1, requires_grad=True))
 
 
+    #bounds of overall domain
     x_min = -503
     y_min = -502
     z_min = 0
